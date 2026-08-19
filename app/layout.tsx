@@ -1,16 +1,11 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Nunito_Sans } from "next/font/google";
 import "./globals.css";
+import { cn } from "@/lib/utils";
+import { Toaster } from "@/components/ui/sonner";
+import { Header } from "@/components/header";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
+const nunitoSans = Nunito_Sans({variable:'--font-sans'});
 
 export const metadata: Metadata = {
   title: "ПК Собиратель",
@@ -23,11 +18,12 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html
-      lang="en"
-      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
-    >
-      <body className="min-h-full flex flex-col">{children}</body>
+    <html lang="ru" className={cn("font-sans", nunitoSans.variable, 'dark')}>
+      <body className="antialiased">
+        <Header />
+        {children}
+        <Toaster position="top-center"/>
+      </body>
     </html>
   );
 }

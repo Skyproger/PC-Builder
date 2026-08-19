@@ -1,0 +1,85 @@
+generator client {
+  provider = "prisma-client" ///сгенерируй клиент для работы с базой
+  output   = "../lib/generated/prisma" ///куда положить код
+}
+
+datasource db {
+  provider = "postgresql" //моя бд - постргерс
+}
+
+
+
+model User {
+  id String @id @default(cuid()) //cuid - генерирует уникальный id 
+  email String @unique //@unique = нельзя повторять 2 одинаковых имейл не может быть
+  name  String?
+  password String
+
+  builds Build[]
+  likes Like[]
+
+  createdAt DateTime @default(now())
+}
+
+model Component {
+  id String @id @default(cuid())
+  type ComponentType
+  name String
+  price Int
+
+  socket String?
+
+  buildComponents BuildComponent[]
+}
+
+model Build {
+  id String @id @default(cuid())
+  name String
+  totalPrice Int @default(0)
+
+  userId String
+  user User @relation(fields: [userId],references: [id],onDelete: Cascade)
+
+  components BuildComponent[]
+
+  isPublic Boolean @default(false)
+
+  likes Like[]
+
+  createdAt DateTime @default(now())
+}
+
+model BuildComponent {
+  id String @id @default(cuid())
+  buildId String
+  build Build @relation(fields: [buildId],references: [id],onDelete: Cascade)
+
+  componentId String
+  component Component @relation(fields: [componentId],references: [id],onDelete: Cascade)
+
+  @@unique([buildId,componentId])
+}
+
+model Like {
+  id String @id @default(cuid())
+  userId String
+  user User @relation(fields: [userId],references: [id],onDelete: Cascade)
+
+  buildId String
+  build Build @relation(fields: [buildId],references: [id],onDelete: Cascade)
+
+  @@unique([userId,buildId])
+}
+
+
+enum ComponentType {
+  cpu
+  gpu
+  ram
+  ssd
+  motherboard
+  psu
+  case 
+  cooler
+
+}
