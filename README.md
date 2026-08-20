@@ -20,4 +20,4 @@
 
 **Стек**
 
-  TypeScript (strict), Next.js, React, Prisma ORM, PostgreSQL 15, Auth.js, bcryptjs, Tailwind CSS + shadcn/ui + Radix, Docker Compose, Jest + Testing Library, CI/CD-пайплайн. Многослойная архитектура (data → auth → server actions → UI), строгая типизация от схемы Prisma до React-компонентов, DevOps-часть развёрнута самостоятельно.
+&nbsp;&nbsp;&nbsp;&nbsp;TypeScript (strict), Next.js, React, Prisma ORM, PostgreSQL 15, Auth.js, bcryptjs, Tailwind CSS + shadcn/ui + Radix, Docker Compose, Jest + Testing Library, CI/CD-пайплайн. Многослойная архитектура (data → auth → server actions → UI), строгая типизация от схемы Prisma до React-компонентов, DevOps-часть развёрнута самостоятельно.
